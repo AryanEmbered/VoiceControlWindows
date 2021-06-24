@@ -10,50 +10,38 @@ from vosk import SetLogLevel
 import os
 import win32gui
 import win32con
-from collections import defaultdict
-import csv
 
 global suspended, config, input
 suspended = {}
-
 SetLogLevel(-1)
 
 
-def def_val():
-    print("No Command Found")
-
-
-config = defaultdict(def_val)
-fhead = ["type", "location", "feedback", "command"]
-with open('config.csv', 'r') as f:
-    f = csv.DictReader(f)
-    for record in f:
-        cmd = {}
-        for head in fhead:
-            cmd[head] = record[head]
-        config[record["command"]] = cmd
-
-
-wordlist = []
-for key in config.keys():
-    towrite = '"' + key + '"'
-    wordlist.append(towrite)
-
-wordlist.append('"type", "dictate", "transcribe", "dictation", "voice on"')
-wordlist.append('"voice song", "start voice", "mike on", "mic on", "turn on"')
-wordlist.append('"voice of", "close", "mike of", "nike of", "micron", "down"')
-wordlist.append('"scroll", "gown", "up", "top", "previous", "application"')
-wordlist.append('"tab", "switch application", "suspend","resume", "turn of"')
-wordlist.append('"done"')
-words = str(wordlist).replace("'", "")
+def getwordlist():
+    wordlist = []
+    i = 4
+    f = open('config.txt', 'r')
+    config = f.read().split('-+-')
+    f.close()
+    lengthofconfig = len(config)
+    while i < lengthofconfig:
+        towrite = '"' + config[i] + '"'
+        wordlist.append(towrite)
+        i = i+5
+    wordlist.append('"type", "dictate", "transcribe", "dictation", "voice on"')
+    wordlist.append('"voice song", "start voice", "mike on", "mic on", "turn on"')
+    wordlist.append('"voice of", "close", "mike of", "nike of", "micron", "down"')
+    wordlist.append('"scroll", "gown", "up", "top", "previous", "application"')
+    wordlist.append('"tab", "switch application", "suspend","resume", "turn of"')
+    wordlist.append('"done"')
+    words = str(wordlist).replace("'", "")
+    return words
 
 
 MODEL = Model("indian")
-rec = KaldiRecognizer(MODEL, 16000, words)
+rec = KaldiRecognizer(MODEL, 16000, getwordlist())
 
 P = pyaudio.PyAudio()
-stream = P.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True,
-                frames_per_buffer=8000)
+stream = P.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True, frames_per_buffer=8000)
 stream.start_stream()
 
 
@@ -72,57 +60,31 @@ def listen():
             print("No input")
 
 
-def dictation():
-    # speak("transcribe mode")
-    print("dictation mode")
-    rec = KaldiRecognizer(MODEL, 16000)
-    while True:
-        # audioio.speak("ready")
-        DATA = stream.read(5000, exception_on_overflow=False)
-        if len(DATA) == 0:
-            pass
-        try:
-            if rec.AcceptWaveform(DATA):
-                string = rec.Result().rsplit(":")[-1][2:-3]
-                if string != "":
-                    if "stop typing" in string:
-                        speak("dictation complete")
-                        print("dictation complete")
-                        break
-                    print(string)
-                    pyautogui.write(string)
-                    pyautogui.write(" ")
-        except Exception:
-            pass
-
-
-def scrollfxn():
-    upscroll = ["up", "top"]
-    if input in upscroll:
-        print("scrolling now")
-        pyautogui.scroll(5000)
-
-    downscroll = ["down", "scroll", "gown"]
-    if input in downscroll:
-        print("scrolling now")
-        pyautogui.scroll(-600)
-
-
-def appswitching():
-    if "previous application" in input:
-        pyautogui.keyDown('alt')
-        time.sleep(.2)
-        pyautogui.press('tab')
-        time.sleep(.2)
-        pyautogui.keyUp('alt')
-
-    if "previous previous application" in input:
-        pyautogui.keyDown('alt')
-        time.sleep(.2)
-        pyautogui.press('tab')
-        time.sleep(.2)
-        pyautogui.press('tab')
-        pyautogui.keyUp('alt')
+def dictation(input):
+    dictation = ["transcribe", "dictate", "dictation"]
+    for x in dictation:
+        if x in input:
+            speak("transcribe mode")
+            print("dictation mode")
+            rec = KaldiRecognizer(MODEL, 16000)
+            while True:
+                # audioio.speak("ready")
+                DATA = stream.read(5000, exception_on_overflow=False)
+                if len(DATA) == 0:
+                    pass
+                try:
+                    if rec.AcceptWaveform(DATA):
+                        string = rec.Result().rsplit(":")[-1][2:-3]
+                        if string != "":
+                            if "stop typing" in string:
+                                speak("dictation complete")
+                                print("dictation complete")
+                                break
+                            print(string)
+                            pyautogui.write(string)
+                            pyautogui.write(" ")
+                except Exception:
+                    pass
 
 
 def speak(text):
@@ -130,11 +92,16 @@ def speak(text):
     rate = engine.getProperty('rate')
     engine.setProperty('rate', rate-30)
     engine.say(text)
-    #engine.save_to_file(text, 'lastcommand.wav')
+    # engine.save_to_file(text, 'lastcommand.wav')
     engine.runAndWait()
 
 
 def openapp(location, command):
+    subprocess.run([location])
+    print(location)
+
+
+def rungame(location, command):
     path = location.rsplit("\\",1)[0]
     os.chdir(path)
     exename = location.rsplit("\\",1)[1]
@@ -170,7 +137,7 @@ def suspendapplication(processname):
         print(processname, " is running")
         cmdstring = 'suspend.exe '+processname
         os.system(cmdstring)
-        speak("process suspended")
+        # speak("process suspended")
         win_handle_suspended_app = win32gui.GetForegroundWindow()
         suspended[processname] = win_handle_suspended_app
 
@@ -178,9 +145,47 @@ def suspendapplication(processname):
 def resume(processname):
     cmdstring = cmdstring = 'suspend.exe '+'-r '+processname
     os.system(cmdstring)
-    speak("process resume")
+    # speak("process resume")
     wintomaximize = suspended.get(processname)
     win32gui.ShowWindow(wintomaximize, win32con.SW_SHOWNORMAL)
+
+
+def altdoubletab():
+    pyautogui.keyDown('alt')
+    time.sleep(.2)
+    pyautogui.press('tab')
+    time.sleep(.2)
+    pyautogui.press('tab')
+    pyautogui.keyUp('alt')
+
+
+def alttab():
+    pyautogui.keyDown('alt')
+    time.sleep(.2)
+    pyautogui.press('tab')
+    time.sleep(.2)
+    pyautogui.keyUp('alt')
+
+
+def scroll(command, a):
+    print("scrolling now")
+    pyautogui.scroll(a)
+
+
+def scrolling():
+    if "top" in input:
+        upscroll = ["up", "top"]
+        scroll(upscroll, 5000)
+    if "scroll" in input:
+        downscroll = ["down", "scroll", "gown"]
+        scroll(downscroll, -600)
+
+
+def appswitching():
+    if "previous application" in input:
+        alttab()
+    if "previous previous application" in input:
+        altdoubletab()
 
 
 def main():
@@ -195,63 +200,61 @@ def main():
 def on(Mic):
     while Mic is True:
         print("listening")
+        global input
+
         input = listen()
 
-        dic = ["transcribe", "dictate", "dictation"]
-        if input in dic:
-            dictation()
-            continue
+        dictation(input)
 
-        scrollfxn()
+        scrolling()
 
         appswitching()
 
-        cmd_details = config.get(input)
-        if cmd_details == "No Command Found":
-            print(cmd_details)
-            continue
+        if input in config:
+            voicecommand = config[config.index(input)]
+            consoleoutput = config[config.index(input)-1]
+            commandreference = config[config.index(input)-2]
+            typeofcommand = config[config.index(input)-3]
 
-        if "openapp" in cmd_details["type"]:
-            print("Opening app: ", cmd_details["feedback"])
-            openapp(cmd_details["location"],
-                    cmd_details["command"])
+            if "openapp" in voicecommand:
+                print("Opening app: ", consoleoutput)
+                openapp(commandreference, voicecommand)
 
-        if "link" in cmd_details["type"]:
-            print("Opening Link to ", cmd_details["feedback"])
-            link(cmd_details["location"], cmd_details["command"])
+            if "rungame" in typeofcommand:
+                print("Running cmd command: ", consoleoutput)
+                rungame(commandreference, voicecommand)
 
-        if "buttoncomb" in cmd_details["type"]:
-            print("Button press command: ", cmd_details["feedback"])
-            buttoncomb(
-                cmd_details["location"].split("+")[0],
-                cmd_details["location"].split("+")[1],
-                cmd_details["command"])
+            if "link" in typeofcommand:
+                print("Opening Link to ", consoleoutput)
+                link(commandreference, voicecommand)
 
-        if "button3comb" in cmd_details["type"]:
-            print("Button press command: ", cmd_details["feedback"])
-            button3comb(
-                cmd_details["location"].split("+")[0],
-                cmd_details["location"].split("+")[1],
-                cmd_details["location"].split("+")[2],
-                cmd_details["command"])
+            if "buttoncomb" in typeofcommand:
+                print("Button press command: ", consoleoutput)
+                buttoncomb(commandreference.split("+")[0],
+                           commandreference.split("+")[1], voicecommand)
 
-        if "keypress" in cmd_details["type"]:
-            print("single keypress command: ", cmd_details["feedback"])
-            keypress(cmd_details["location"].split("+")[0],
-                     cmd_details["command"])
+            if "button3comb" in typeofcommand:
+                print("Button press command: ", consoleoutput)
+                button3comb(
+                    commandreference.split("+")[0],
+                    commandreference.split("+")[1],
+                    commandreference.split("+")[2], voicecommand)
 
-        if "typingshortcut" in cmd_details["type"]:
-            print("typecommand command: ", cmd_details["feedback"])
-            typingshortcut(cmd_details["location"].split("+")[0],
-                           cmd_details["command"])
+            if "keypress" in typeofcommand:
+                print("single keypress command: ", consoleoutput)
+                keypress(commandreference.split("+")[0], voicecommand)
 
-        if "appsuspender" in cmd_details["type"]:
-            print("Suspend command: ", cmd_details["feedback"])
-            suspendapplication(cmd_details["location"])
+            if "typingshortcut" in typeofcommand:
+                print("typecommand command: ", consoleoutput)
+                typingshortcut(commandreference.split("+")[0], voicecommand)
 
-        if "resume" in cmd_details["type"]:
-            print("resume command: ", cmd_details["feedback"])
-            resume(cmd_details["location"])
+            if "appsuspender" in typeofcommand:
+                print("Suspend command: ", consoleoutput)
+                suspendapplication(commandreference)
+
+            if "resume" in typeofcommand:
+                print("resume command: ", consoleoutput)
+                resume(commandreference)
 
         # stopping voice commands
         close = ["voice of", "turn of"]
@@ -268,7 +271,7 @@ def off(Mic):
     while(Mic is False):
         # audioio.dictation(l)
         b = listen()
-        start = ["voice on", "start voice", "mike on", "mic on", "turn on"]
+        start = ["voice on", "voice song", "start voice", "mike on", "mic on", "turn on", "micron"]
         for x in start:
             if b == x:
                 print("Turning on")
@@ -279,6 +282,10 @@ def off(Mic):
                 print("resumed listening")
                 break
 
+
+f = open('config.txt', 'r')
+config = f.read().split('-+-')
+f.close()
 
 owd = os.getcwd()
 
