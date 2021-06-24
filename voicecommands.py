@@ -40,6 +40,7 @@ def getwordlist():
     words = str(wordlist).replace("'", "")
     return words
 
+
 print(getwordlist())
 MODEL = Model("indian")
 rec = KaldiRecognizer(MODEL, 16000, getwordlist())
@@ -102,9 +103,9 @@ def speak(text):
 
 
 def openapp(location, command):
-    path = location.rsplit("\\",1)[0]
+    path = location.rsplit("\\", 1)[0]
     os.chdir(path)
-    exename = location.rsplit("\\",1)[1]
+    exename = location.rsplit("\\", 1)[1]
     os.startfile(exename)
     os.chdir(owd)
 
