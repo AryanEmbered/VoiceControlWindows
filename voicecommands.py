@@ -96,7 +96,7 @@ def openapp(location, command):
             break
 
 
-def cmdcommand(location, command):
+def rungame(location, command):
     for x in command:
         if x in l:
             path = location.rsplit("\\",1)[0]
@@ -104,12 +104,6 @@ def cmdcommand(location, command):
             exename = location.rsplit("\\",1)[1]
             os.startfile(exename)
             os.chdir(owd)
-            #os.startfile(location)
-            '''cmdstring = '"'+location+'"'
-            print(cmdstring)
-            subprocess.check_output(cmdstring, shell=True)
-            subprocess.run([location])
-            print(location)'''
             break
 
 
@@ -156,13 +150,17 @@ def suspendapplication(processname):
         print(processname, " is running")
         cmdstring = 'suspend.exe '+processname
         os.system(cmdstring)
-        #speak("process suspended")
+        speak("process suspended")
+        win_handle_suspended_app = win32gui.GetForegroundWindow()
+        suspended[processname] = win_handle_suspended_app
 
 
 def resume(processname):
     cmdstring = cmdstring = 'suspend.exe '+'-r '+processname
     os.system(cmdstring)
-    #speak("process resume")
+    speak("process resume")
+    wintomaximize = suspended.get(processname)
+    win32gui.ShowWindow(wintomaximize, win32con.SW_SHOWNORMAL)
 
 
 def altdoubletab():
@@ -200,13 +198,7 @@ def main():
 
 
 def on(Mic):
-    global suspended
-    suspended = {}
-    f = open('config.txt', 'r')
-    config = f.read().split('-+-')
-    f.close()
     while Mic is True:
-
         global l
         print("listening")
         l = listen()
@@ -222,6 +214,8 @@ def on(Mic):
 
         if "previous application" in l:
             alttab()
+        if "previous previous application" in l:
+            altdoubletab()
 
         if l in config:
             if "openapp" in config[config.index(l)-3]:
@@ -229,10 +223,10 @@ def on(Mic):
                 openapp(config[config.index(l)-2],
                         config[config.index(l)])
 
-            if "cmdcommand" in config[config.index(l)-3]:
+            if "rungame" in config[config.index(l)-3]:
                 print("Running cmd command: ", config[config.index(l)-1])
-                cmdcommand(config[config.index(l)-2],
-                           config[config.index(l)])
+                rungame(config[config.index(l)-2],
+                        config[config.index(l)])
 
             if "link" in config[config.index(l)-3]:
                 print("Opening Link to ", config[config.index(l)-1])
@@ -272,14 +266,11 @@ def on(Mic):
 
             if "appsuspender" in config[config.index(l)-3]:
                 print("Suspend command: ", config[config.index(l)-1])
-                suspended[config[config.index(l)-2]] = win32gui.GetForegroundWindow()
                 suspendapplication(config[config.index(l)-2])
 
             if "resume" in config[config.index(l)-3]:
                 print("resume command: ", config[config.index(l)-1])
                 resume(config[config.index(l)-2])
-                key = config[config.index(l)-2]
-                win32gui.ShowWindow(suspended.get(key), win32con.SW_SHOWNORMAL)
 
         # stopping voice commands
         close = ["voice of", "turn of"]
@@ -308,7 +299,13 @@ def off(Mic):
                 break
 
 
+global suspended, config, l
+f = open('config.txt', 'r')
+config = f.read().split('-+-')
+f.close()
+suspended = {}
 owd = os.getcwd()
+
 Mic = True
 if __name__ == "__main__":
     main()

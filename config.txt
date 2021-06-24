@@ -4,21 +4,22 @@
 
 -+-openapp-+-C:\Users\aryan\Desktop\System utilities\scrcpy-win64-v1.14\scrcpy-noconsole.exe-+-scrcpy-+-phone-+-
 
--+-cmdcommand-+-D:\Cuphead\Cuphead.exe-+-Launching Cuphead-+-run cup head-+-
+-+-rungame-+-D:\Cuphead\Cuphead.exe-+-Launching Cuphead-+-run cup head-+-
 
--+-cmdcommand-+-C:\Users\aryan\3D Objects\The Witcher 3 - Wild Hunt\bin\x64\witcher3.exe-+- Launching Witcher3 -+-run witch-+-
+-+-rungame-+-C:\Users\aryan\3D Objects\The Witcher 3 - Wild Hunt\bin\x64\witcher3.exe-+- Launching Witcher3 -+-run witch-+-
 
--+-cmdcommand-+-C:\Users\aryan\3D Objects\Sekiro - Shadows Die Twice\sekiro.exe-+-launching Sekiro-+-run say ki ro-+-
+-+-rungame-+-C:\Users\aryan\3D Objects\Sekiro - Shadows Die Twice\sekiro.exe-+-launching Sekiro-+-run say ki ro-+-
 
--+-cmdcommand-+-D:\Superhot\SH.exe-+-launching Superhot-+-run super hot-+-
+-+-rungame-+-D:\Superhot\SH.exe-+-launching Superhot-+-run super hot-+-
 
--+-cmdcommand-+-D:\Hades\x64\Hades.exe-+-launching Hades-+-run hey these-+-
+-+-rungame-+-D:\Hades\x64\Hades.exe-+-launching Hades-+-run hey these-+-
 
--+-cmdcommand-+-D:\Mirror's Edge G\Binaries\MirrorsEdge.exe-+-launching Mirrors Edge-+-run mirror edge-+-
+-+-rungame-+-D:\Mirror's Edge G\Binaries\MirrorsEdge.exe-+-launching Mirrors Edge-+-run mirror edge-+-
 
 
 
--+-link-+-https://www.youtube.com/feed/subscriptions-+-website: youtube-+-videos-+-
+-+-link-+-https://www.youtube.com/feed/subscriptions -+-website: YouTube-+-you tube-+-
+-+-link-+-https://www.youtube.com/watch?v=x7s8968L8QE&t=484s&ab_channel=MusicrundiAntoñoaguirre -+-Website: Music on YouTube-+-music-+-
 
 
 
@@ -46,9 +47,12 @@
 -+-button3comb-+-shift+ctrl+esc-+-opening task manager-+-i want to talk to the manager-+-
 
 
+
 -+-keypress-+-space+-+-pressing spacebar-+-space-+-
 
 -+-keypress-+-f5-+-refresh the current webpage-+-refresh-+-
+
+
 
 -+-typingshortcut-+-this is going to type a lot of shit+-+-typing shit-+-shit-+-
 
