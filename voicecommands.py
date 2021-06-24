@@ -190,7 +190,7 @@ def on(Mic):
         print("listening")
         l = listen()
         dic = ["transcribe", "dictate", "dictation"]
-        if l in dic:#
+        if l in dic:
             dictation()
             continue
 
