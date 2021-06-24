@@ -42,7 +42,7 @@ for key in config.keys():
 wordlist.append('"type", "dictate", "transcribe", "dictation", "voice on"')
 wordlist.append('"voice song", "start voice", "mike on", "mic on", "turn on"')
 wordlist.append('"voice of", "close", "mike of", "nike of", "micron", "down"')
-wordlist.append('"scroll", "gown", "up", "top", "previous", "application", "done"')
+wordlist.append('"scroll", "gown", "up", "top", "previous", "application"')
 wordlist.append('"tab", "switch application", "suspend","resume", "turn of"')
 wordlist.append('"done"')
 words = str(wordlist).replace("'", "")
@@ -52,7 +52,8 @@ MODEL = Model("indian")
 rec = KaldiRecognizer(MODEL, 16000, words)
 
 P = pyaudio.PyAudio()
-stream = P.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True, frames_per_buffer=8000)
+stream = P.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True,
+                frames_per_buffer=8000)
 stream.start_stream()
 
 
@@ -267,7 +268,7 @@ def off(Mic):
     while(Mic is False):
         # audioio.dictation(l)
         b = listen()
-        start = ["voice on", "voice song", "start voice", "mike on", "mic on", "turn on", "micron"]
+        start = ["voice on", "start voice", "mike on", "mic on", "turn on"]
         for x in start:
             if b == x:
                 print("Turning on")
