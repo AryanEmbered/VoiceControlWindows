@@ -12,18 +12,19 @@ import win32gui, win32con
 from collections import defaultdict
 import csv
 
-SetLogLevel(-1)
-
-global suspended, config, l
-
-def def_val():
-    return "No Command Found"
-
+global suspended, config, input
 suspended = {}
 
+SetLogLevel(-1)
+
+
+def def_val():
+    print("No Command Found")
+
+
 config = defaultdict(def_val)
-fhead = ["type","location","feedback","command"]
-with open('config.csv','r') as f:
+fhead = ["type", "location", "feedback", "command"]
+with open('config.csv', 'r') as f:
     f = csv.DictReader(f)
     for record in f:
         cmd = {}
@@ -87,7 +88,6 @@ def dictation():
                     pyautogui.write(" ")
         except:
             pass
-        
 
 
 def speak(text):
@@ -100,11 +100,6 @@ def speak(text):
 
 
 def openapp(location, command):
-    subprocess.run([location])
-    print(location)
-
-
-def rungame(location, command):
     path = location.rsplit("\\",1)[0]
     os.chdir(path)
     exename = location.rsplit("\\",1)[1]
@@ -186,66 +181,53 @@ def main():
 
 def on(Mic):
     while Mic is True:
-        global l
         print("listening")
-        l = listen()
+        input = listen()
+
         dic = ["transcribe", "dictate", "dictation"]
-        if l in dic:
+        if input in dic:
             dictation()
             continue
 
-        if "top" in l:
+        if "top" in input:
             upscroll = ["up", "top"]
             scroll(upscroll, 5000)
             continue
-        if "scroll" in l:
+        if "scroll" in input:
             downscroll = ["down", "scroll", "gown"]
             scroll(downscroll, -600)
             continue
 
-        if "previous application" in l:
+        if "previous application" in input:
             alttab()
             continue
-        if "previous previous application" in l:
+        if "previous previous application" in input:
             altdoubletab()
             continue
-        
-        cmd_details = config.get(l)
-        print(cmd_details)
 
+        cmd_details = config.get(input)
         if cmd_details == "No Command Found":
             print(cmd_details)
             continue
-        
-        
-        
 
         if "openapp" in cmd_details["type"]:
             print("Opening app: ", cmd_details["feedback"])
             openapp(cmd_details["location"],
                     cmd_details["command"])
 
-        if "rungame" in cmd_details["type"]:
-            print("Running cmd command: ", cmd_details["feedback"])
-            rungame(cmd_details["location"],
-                    cmd_details["command"])
-
         if "link" in cmd_details["type"]:
             print("Opening Link to ", cmd_details["feedback"])
-            link(cmd_details["location"],
-                    cmd_details["command"])
+            link(cmd_details["location"], cmd_details["command"])
 
         if "buttoncomb" in cmd_details["type"]:
-            print("Button press command: ",
-                    cmd_details["feedback"])
+            print("Button press command: ", cmd_details["feedback"])
             buttoncomb(
                 cmd_details["location"].split("+")[0],
                 cmd_details["location"].split("+")[1],
                 cmd_details["command"])
 
         if "button3comb" in cmd_details["type"]:
-            print("Button press command: ",
-                    cmd_details["feedback"])
+            print("Button press command: ", cmd_details["feedback"])
             button3comb(
                 cmd_details["location"].split("+")[0],
                 cmd_details["location"].split("+")[1],
@@ -253,14 +235,14 @@ def on(Mic):
                 cmd_details["command"])
 
         if "keypress" in cmd_details["type"]:
-            print("single keypress command: ",
-                    cmd_details["feedback"])
-            keypress(cmd_details["location"].split("+")[0], cmd_details["command"])
+            print("single keypress command: ", cmd_details["feedback"])
+            keypress(cmd_details["location"].split("+")[0],
+                     cmd_details["command"])
 
         if "typingshortcut" in cmd_details["type"]:
-            print("typecommand command: ",
-                    cmd_details["feedback"])
-            typingshortcut(cmd_details["location"].split("+")[0], cmd_details["command"])
+            print("typecommand command: ", cmd_details["feedback"])
+            typingshortcut(cmd_details["location"].split("+")[0],
+                           cmd_details["command"])
 
         if "appsuspender" in cmd_details["type"]:
             print("Suspend command: ", cmd_details["feedback"])
@@ -273,7 +255,7 @@ def on(Mic):
         # stopping voice commands
         close = ["voice of", "turn of"]
         for x in close:
-            if x in l:
+            if x in input:
                 Mic = False
                 print("Program Paused. Speech Recognition turned off")
                 break
@@ -295,7 +277,6 @@ def off(Mic):
                 speak("on")
                 print("resumed listening")
                 break
-
 
 
 owd = os.getcwd()
