@@ -4,17 +4,17 @@
 
 ,openapp,C:\Users\aryan\Desktop\System utilities\scrcpy-win64-v1.14\scrcpy-noconsole.exe,scrcpy,phone,
 
-,rungame,D:\Cuphead\Cuphead.exe,Launching Cuphead,run cup head,
+,openapp,D:\Cuphead\Cuphead.exe,Launching Cuphead,run cup head,
 
-,rungame,C:\Users\aryan\3D Objects\The Witcher 3 - Wild Hunt\bin\x64\witcher3.exe, Launching Witcher3 ,run witch,
+,openapp,C:\Users\aryan\3D Objects\The Witcher 3 - Wild Hunt\bin\x64\witcher3.exe, Launching Witcher3 ,run witch,
 
-,rungame,C:\Users\aryan\3D Objects\Sekiro - Shadows Die Twice\sekiro.exe,launching Sekiro,run say ki ro,
+,openapp,C:\Users\aryan\3D Objects\Sekiro - Shadows Die Twice\sekiro.exe,launching Sekiro,run say ki ro,
 
-,rungame,D:\Superhot\SH.exe,launching Superhot,run super hot,
+,openapp,D:\Superhot\SH.exe,launching Superhot,run super hot,
 
-,rungame,D:\Hades\x64\Hades.exe,launching Hades,run hey these,
+,openapp,D:\Hades\x64\Hades.exe,launching Hades,run hey these,
 
-,rungame,D:\Mirror's Edge G\Binaries\MirrorsEdge.exe,launching Mirrors Edge,run mirror edge,
+,openapp,D:\Mirror's Edge G\Binaries\MirrorsEdge.exe,launching Mirrors Edge,run mirror edge,
 
 
 

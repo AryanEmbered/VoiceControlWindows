@@ -98,11 +98,6 @@ def speak(text):
 
 
 def openapp(location, command):
-    subprocess.run([location])
-    print(location)
-
-
-def rungame(location, command):
     path = location.rsplit("\\",1)[0]
     os.chdir(path)
     exename = location.rsplit("\\",1)[1]
@@ -220,10 +215,6 @@ def on(Mic):
             if "openapp" in voicecommand:
                 print("Opening app: ", consoleoutput)
                 openapp(commandreference, voicecommand)
-
-            if "rungame" in typeofcommand:
-                print("Running cmd command: ", consoleoutput)
-                rungame(commandreference, voicecommand)
 
             if "link" in typeofcommand:
                 print("Opening Link to ", consoleoutput)
