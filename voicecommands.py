@@ -9,6 +9,8 @@ from vosk import Model
 from vosk import SetLogLevel
 import os
 import win32gui, win32con
+from collections import defaultdict
+import csv
 
 SetLogLevel(-1)
 
@@ -275,12 +277,21 @@ def off(Mic):
                 print("resumed listening")
                 break
 
+def def_val():
+    return "No Command found"
 
 global suspended, config, l
 f = open('config.txt', 'r')
-config = f.read().split('-+-')
-f.close()
+config = defaultdict(def_val)
 suspended = {}
+fhead = ["type","location","feedback"]
+with open('config.csv','r') as f:
+    f = csv.DictReader(f)
+    for record in f:
+        cmd = {}
+        for head in fhead:
+            cmd[head] = record[head]
+        config[record["command"]] = cmd
 owd = os.getcwd()
 
 Mic = True
