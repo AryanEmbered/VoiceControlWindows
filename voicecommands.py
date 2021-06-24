@@ -20,7 +20,7 @@ def getwordlist():
     wordlist = []
     i = 4
     f = open('config.txt', 'r')
-    config = f.read().split('-+-')
+    config = f.read().split(',')
     f.close()
     lengthofconfig = len(config)
     while i < lengthofconfig:
@@ -36,7 +36,7 @@ def getwordlist():
     words = str(wordlist).replace("'", "")
     return words
 
-
+print(getwordlist())
 MODEL = Model("indian")
 rec = KaldiRecognizer(MODEL, 16000, getwordlist())
 
@@ -285,7 +285,7 @@ def off(Mic):
 
 
 f = open('config.txt', 'r')
-config = f.read().split('-+-')
+config = f.read().split(',')
 f.close()
 
 owd = os.getcwd()

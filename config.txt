@@ -1,89 +1,89 @@
--+-openapp-+-C:\Windows\system32\notepad.exe-+-notepad-+-note pad-+-
+,openapp,C:\Windows\system32\notepad.exe,notepad,note pad,
 
--+-openapp-+-C:\Users\aryan\3D Objects\Movavi Video Editor Plus\VideoEditorPlus.exe-+-movavi-+-video editing-+-
+,openapp,C:\Users\aryan\3D Objects\Movavi Video Editor Plus\VideoEditorPlus.exe,movavi,video editing,
 
--+-openapp-+-C:\Users\aryan\Desktop\System utilities\scrcpy-win64-v1.14\scrcpy-noconsole.exe-+-scrcpy-+-phone-+-
+,openapp,C:\Users\aryan\Desktop\System utilities\scrcpy-win64-v1.14\scrcpy-noconsole.exe,scrcpy,phone,
 
--+-rungame-+-D:\Cuphead\Cuphead.exe-+-Launching Cuphead-+-run cup head-+-
+,rungame,D:\Cuphead\Cuphead.exe,Launching Cuphead,run cup head,
 
--+-rungame-+-C:\Users\aryan\3D Objects\The Witcher 3 - Wild Hunt\bin\x64\witcher3.exe-+- Launching Witcher3 -+-run witch-+-
+,rungame,C:\Users\aryan\3D Objects\The Witcher 3 - Wild Hunt\bin\x64\witcher3.exe, Launching Witcher3 ,run witch,
 
--+-rungame-+-C:\Users\aryan\3D Objects\Sekiro - Shadows Die Twice\sekiro.exe-+-launching Sekiro-+-run say ki ro-+-
+,rungame,C:\Users\aryan\3D Objects\Sekiro - Shadows Die Twice\sekiro.exe,launching Sekiro,run say ki ro,
 
--+-rungame-+-D:\Superhot\SH.exe-+-launching Superhot-+-run super hot-+-
+,rungame,D:\Superhot\SH.exe,launching Superhot,run super hot,
 
--+-rungame-+-D:\Hades\x64\Hades.exe-+-launching Hades-+-run hey these-+-
+,rungame,D:\Hades\x64\Hades.exe,launching Hades,run hey these,
 
--+-rungame-+-D:\Mirror's Edge G\Binaries\MirrorsEdge.exe-+-launching Mirrors Edge-+-run mirror edge-+-
-
-
-
--+-link-+-https://www.youtube.com/feed/subscriptions -+-website: YouTube-+-you tube-+-
--+-link-+-https://www.youtube.com/watch?v=x7s8968L8QE&t=484s&ab_channel=MusicrundiAntoñoaguirre -+-Website: Music on YouTube-+-music-+-
+,rungame,D:\Mirror's Edge G\Binaries\MirrorsEdge.exe,launching Mirrors Edge,run mirror edge,
 
 
 
--+-buttoncomb-+-alt+d-+-next browser tab-+-right-+-
-
--+-buttoncomb-+-alt+a-+-previous browser tab-+-left-+-
-
--+-buttoncomb-+-alt+e-+-open a new browser tab-+-new tab-+-
-
--+-buttoncomb-+-alt+w-+-closing the current browser tab-+-terminate-+-
-
--+-buttoncomb-+-ctrl+backspace-+-pressing backspace-+-delete-+-
-
--+-buttoncomb-+-win+down-+-Minimizing the window in focus-+-minimize-+-
-
--+-buttoncomb-+-win+up-+-Maximizing the window in focus-+-maximize-+-
-
--+-buttoncomb-+-alt+f4-+-killing the window in focus-+-kill app-+-
-
-
--+-button3comb-+-win+ctrl+left-+-move to the virtual desktop on the left-+-swipe left-+-
-
--+-button3comb-+-win+ctrl+right-+-move to the virtual desktop on the right-+-swipe right-+-
-
--+-button3comb-+-shift+ctrl+esc-+-opening task manager-+-i want to talk to the manager-+-
+,link,https://www.youtube.com/feed/subscriptions ,website: YouTube,you tube,
+,link,https://www.youtube.com/watch?v=x7s8968L8QE&t=484s&ab_channel=MusicrundiAntoñoaguirre ,Website: Music on YouTube,music,
 
 
 
--+-keypress-+-space+-+-pressing spacebar-+-space-+-
+,buttoncomb,alt+d,next browser tab,right,
 
--+-keypress-+-f5-+-refresh the current webpage-+-refresh-+-
+,buttoncomb,alt+a,previous browser tab,left,
+
+,buttoncomb,alt+e,open a new browser tab,new tab,
+
+,buttoncomb,alt+w,closing the current browser tab,terminate,
+
+,buttoncomb,ctrl+backspace,pressing backspace,delete,
+
+,buttoncomb,win+down,Minimizing the window in focus,minimize,
+
+,buttoncomb,win+up,Maximizing the window in focus,maximize,
+
+,buttoncomb,alt+f4,killing the window in focus,kill app,
+
+
+,button3comb,win+ctrl+left,move to the virtual desktop on the left,swipe left,
+
+,button3comb,win+ctrl+right,move to the virtual desktop on the right,swipe right,
+
+,button3comb,shift+ctrl+esc,opening task manager,i want to talk to the manager,
 
 
 
--+-typingshortcut-+-this is going to type a lot of shit+-+-typing shit-+-shit-+-
+,keypress,space+,pressing spacebar,space,
 
--+-typingshortcut-+-aryantiwari209@gmail.com+-+-typing out the email address-+-email-+-
+,keypress,f5,refresh the current webpage,refresh,
 
 
 
--+-appsuspender-+-Cuphead.exe-+-suspending Cuphead-+-suspend cup head-+-
+,typingshortcut,this is going to type a lot of shit+,typing shit,shit,
 
--+-resume-+-Cuphead.exe-+-resuming Cuphead-+-resume cup head-+-
+,typingshortcut,aryantiwari209@gmail.com+,typing out the email address,email,
 
--+-appsuspender-+-FEAR.exe-+-suspending F.E.A.R-+-suspend fear-+-
 
--+-resume-+-FEAR.exe-+-resuming F.E.A.R-+-resume fear-+-
 
--+-appsuspender-+-sekiro.exe-+-suspending Sekiro-+-suspend say ki ro-+-
+,appsuspender,Cuphead.exe,suspending Cuphead,suspend cup head,
 
--+-resume-+-sekiro.exe-+-resuming Sekiro-+-resume say ki ro-+-
+,resume,Cuphead.exe,resuming Cuphead,resume cup head,
 
--+-appsuspender-+-witcher3.exe-+-suspending Witcher3-+-suspend witch-+-
+,appsuspender,FEAR.exe,suspending F.E.A.R,suspend fear,
 
--+-resume-+-witcher3.exe-+-resuming Witcher3-+-resume witch-+-
+,resume,FEAR.exe,resuming F.E.A.R,resume fear,
 
--+-appsuspender-+-SH.exe-+-suspending Super Hot-+-suspend super hot-+-
+,appsuspender,sekiro.exe,suspending Sekiro,suspend say ki ro,
 
--+-resume-+-SH.exe-+-resuming Super Hot-+-resume super hot-+-
+,resume,sekiro.exe,resuming Sekiro,resume say ki ro,
 
--+-appsuspender-+-Hades.exe-+-suspending Hades-+-suspend hey these-+-
+,appsuspender,witcher3.exe,suspending Witcher3,suspend witch,
 
--+-resume-+-Hades.exe-+-resuming Super Hades-+-resume hey these-+-
+,resume,witcher3.exe,resuming Witcher3,resume witch,
 
--+-appsuspender-+-MirrorsEdge.exe-+-suspending Mirror's Edge-+-suspend mirror edge-+-
+,appsuspender,SH.exe,suspending Super Hot,suspend super hot,
 
--+-resume-+-MirrorsEdge.exe-+-resuming Mirror's Edge-+-resume mirror edge-+-
+,resume,SH.exe,resuming Super Hot,resume super hot,
+
+,appsuspender,Hades.exe,suspending Hades,suspend hey these,
+
+,resume,Hades.exe,resuming Super Hades,resume hey these,
+
+,appsuspender,MirrorsEdge.exe,suspending Mirror's Edge,suspend mirror edge,
+
+,resume,MirrorsEdge.exe,resuming Mirror's Edge,resume mirror edge,
