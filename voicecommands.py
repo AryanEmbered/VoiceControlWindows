@@ -14,6 +14,10 @@ import win32con
 global suspended, config, input
 suspended = {}
 SetLogLevel(-1)
+f = open('config.txt', 'r')
+config = f.read().split(',')
+f.close()
+# print(config)
 
 
 def getwordlist():
@@ -274,10 +278,6 @@ def off(Mic):
                 print("resumed listening")
                 break
 
-
-f = open('config.txt', 'r')
-config = f.read().split(',')
-f.close()
 
 owd = os.getcwd()
 
