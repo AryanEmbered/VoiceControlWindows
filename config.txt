@@ -37,7 +37,7 @@
 
 ,buttoncomb,win+up,Maximizing the window in focus,maximize,
 
-,buttoncomb,alt+f4,killing the window in focus,kill app,
+,buttoncomb,alt+f4,killing the window in focus,destroy application,
 
 
 ,button3comb,win+ctrl+left,move to the virtual desktop on the left,swipe left,

@@ -212,7 +212,7 @@ def on(Mic):
             commandreference = config[config.index(input)-2]
             typeofcommand = config[config.index(input)-3]
 
-            if "openapp" in voicecommand:
+            if "openapp" in typeofcommand:
                 print("Opening app: ", consoleoutput)
                 openapp(commandreference, voicecommand)
 
