@@ -84,7 +84,7 @@ def speak(text):
     rate = engine.getProperty('rate')
     engine.setProperty('rate', rate-30)
     engine.say(text)
-    #engine.save_to_file(text, 'lastcommand.wav')
+    # engine.save_to_file(text, 'lastcommand.wav')
     engine.runAndWait()
 
 
@@ -201,44 +201,34 @@ def on(Mic):
 
             if "openapp" in voicecommand:
                 print("Opening app: ", consoleoutput)
-                openapp(commandreference,
-                        voicecommand)
+                openapp(commandreference, voicecommand)
 
             if "rungame" in typeofcommand:
                 print("Running cmd command: ", consoleoutput)
-                rungame(commandreference,
-                        voicecommand)
+                rungame(commandreference, voicecommand)
 
             if "link" in typeofcommand:
                 print("Opening Link to ", consoleoutput)
-                link(commandreference,
-                     voicecommand)
+                link(commandreference, voicecommand)
 
             if "buttoncomb" in typeofcommand:
-                print("Button press command: ",
-                      consoleoutput)
-                buttoncomb(
-                    commandreference.split("+")[0],
-                    commandreference.split("+")[1],
-                    voicecommand)
+                print("Button press command: ", consoleoutput)
+                buttoncomb(commandreference.split("+")[0],
+                           commandreference.split("+")[1], voicecommand)
 
             if "button3comb" in typeofcommand:
-                print("Button press command: ",
-                      consoleoutput)
+                print("Button press command: ", consoleoutput)
                 button3comb(
                     commandreference.split("+")[0],
                     commandreference.split("+")[1],
-                    commandreference.split("+")[2],
-                    voicecommand)
+                    commandreference.split("+")[2], voicecommand)
 
             if "keypress" in typeofcommand:
-                print("single keypress command: ",
-                      consoleoutput)
+                print("single keypress command: ", consoleoutput)
                 keypress(commandreference.split("+")[0], voicecommand)
 
             if "typingshortcut" in typeofcommand:
-                print("typecommand command: ",
-                      consoleoutput)
+                print("typecommand command: ", consoleoutput)
                 typingshortcut(commandreference.split("+")[0], voicecommand)
 
             if "appsuspender" in typeofcommand:

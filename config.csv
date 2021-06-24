@@ -1,0 +1,42 @@
+type,location,feedback,command
+openapp,C:\Windows\system32\notepad.exe,notepad,note pad
+openapp,C:\Users\aryan\3D Objects\Movavi Video Editor Plus\VideoEditorPlus.exe,movavi,video editing
+openapp,C:\Users\aryan\Desktop\System utilities\scrcpy-win64-v1.14\scrcpy-noconsole.exe,scrcpy,phone
+cmdcommand,D:\Cuphead\Cuphead.exe,Launching Cuphead,run cup head
+cmdcommand,C:\Users\aryan\3D Objects\The Witcher 3 - Wild Hunt\bin\x64\witcher3.exe, Launching Witcher3 ,run witch
+cmdcommand,C:\Users\aryan\3D Objects\Sekiro - Shadows Die Twice\sekiro.exe,launching Sekiro,run say ki ro
+cmdcommand,D:\Superhot\SH.exe,launching Superhot,run super hot
+cmdcommand,D:\Hades\x64\Hades.exe,launching Hades,run hey these
+cmdcommand,D:\Mirror's Edge G\Binaries\MirrorsEdge.exe,launching Mirrors Edge,run mirror edge
+link,https://www.youtube.com/feed/subscriptions,website: youtube,videos
+buttoncomb,alt+d,next browser tab,right
+buttoncomb,alt+a,previous browser tab,left
+buttoncomb,alt+e,open a new browser tab,new tab
+buttoncomb,alt+w,closing the current browser tab,terminate
+buttoncomb,ctrl+backspace,pressing backspace,delete
+buttoncomb,win+down,Minimizing the window in focus,minimize
+buttoncomb,win+up,Maximizing the window in focus,maximize
+buttoncomb,alt+f4,killing the window in focus,kill app
+button3comb,win+ctrl+left,move to the virtual desktop on the left,swipe left
+button3comb,win+ctrl+right,move to the virtual desktop on the right,swipe right
+button3comb,shift+ctrl+esc,opening task manager,i want to talk to the manager
+keypress,space+,pressing spacebar,space
+keypress,f5,refresh the current webpage,refresh
+typingshortcut,this is going to type a lot of shit+,typing shit,shit
+typingshortcut,aryantiwari209@gmail.com+,typing out the email address,email
+appsuspender,Cuphead.exe,suspending Cuphead,suspend cup head
+resume,Cuphead.exe,resuming Cuphead,resume cup head
+appsuspender,FEAR.exe,suspending F.E.A.R,suspend fear
+resume,FEAR.exe,resuming F.E.A.R,resume fear
+appsuspender,sekiro.exe,suspending Sekiro,suspend say ki ro
+resume,sekiro.exe,resuming Sekiro,resume say ki ro
+appsuspender,witcher3.exe,suspending Witcher3,suspend witch
+resume,witcher3.exe,resuming Witcher3,resume witch
+appsuspender,SH.exe,suspending Super Hot,suspend super hot
+resume,SH.exe,resuming Super Hot,resume super hot
+appsuspender,Hades.exe,suspending Hades,suspend hey these
+resume,Hades.exe,resuming Super Hades,resume hey these
+appsuspender,MirrorsEdge.exe,suspending Mirror's Edge,suspend mirror edge
+resume,MirrorsEdge.exe,resuming Mirror's Edge,resume mirror edge
+appsuspender,BatmanAK.exe,suspending BatmanAK,suspend bat man
+resume,BatmanAK.exe,resuming BatmanAK,resume bat man
