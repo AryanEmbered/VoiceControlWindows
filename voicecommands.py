@@ -84,62 +84,41 @@ def speak(text):
     rate = engine.getProperty('rate')
     engine.setProperty('rate', rate-30)
     engine.say(text)
-    engine.save_to_file(text, 'lastcommand.wav')
+    #engine.save_to_file(text, 'lastcommand.wav')
     engine.runAndWait()
 
 
 def openapp(location, command):
-    for x in command:
-        if x in l:
-            subprocess.run([location])
-            print(location)
-            break
+    subprocess.run([location])
+    print(location)
 
 
 def rungame(location, command):
-    for x in command:
-        if x in l:
-            path = location.rsplit("\\",1)[0]
-            os.chdir(path)
-            exename = location.rsplit("\\",1)[1]
-            os.startfile(exename)
-            os.chdir(owd)
-            break
+    path = location.rsplit("\\",1)[0]
+    os.chdir(path)
+    exename = location.rsplit("\\",1)[1]
+    os.startfile(exename)
+    os.chdir(owd)
 
 
 def link(link, command):
-    for x in command:
-        if x in l:
-            webbrowser.open(link)
-            break
+    webbrowser.open(link)
 
 
 def buttoncomb(but1, but2, command):
-    for x in command:
-        if x in l:
-            pyautogui.hotkey(but1, but2)
-            break
+    pyautogui.hotkey(but1, but2)
 
 
 def button3comb(but1, but2, but3, command):
-    for x in command:
-        if x in l:
-            pyautogui.hotkey(but1, but2, but3)
-            break
+    pyautogui.hotkey(but1, but2, but3)
 
 
-def typingshortcut(command, word):
-    for x in command:
-        if x in l:
-            pyautogui.write(word)
-            break
+def typingshortcut(word, command):
+    pyautogui.write(word)
 
 
-def keypress(command, key):
-    for x in command:
-        if x in l:
-            pyautogui.typewrite([key], interval=0)
-            break
+def keypress(key, command):
+    pyautogui.typewrite([key], interval=0)
 
 
 def suspendapplication(processname):
@@ -181,11 +160,8 @@ def alttab():
 
 
 def scroll(command, a):
-    for x in command:
-        if x in l:
-            print("scrolling now")
-            pyautogui.scroll(a)
-            break
+    print("scrolling now")
+    pyautogui.scroll(a)
 
 
 def main():
@@ -218,59 +194,60 @@ def on(Mic):
             altdoubletab()
 
         if l in config:
-            if "openapp" in config[config.index(l)-3]:
-                print("Opening app: ", config[config.index(l)-1])
-                openapp(config[config.index(l)-2],
-                        config[config.index(l)])
+            voicecommand = config[config.index(l)]
+            consoleoutput = config[config.index(l)-1]
+            commandreference = config[config.index(l)-2]
+            typeofcommand = config[config.index(l)-3]
 
-            if "rungame" in config[config.index(l)-3]:
-                print("Running cmd command: ", config[config.index(l)-1])
-                rungame(config[config.index(l)-2],
-                        config[config.index(l)])
+            if "openapp" in voicecommand:
+                print("Opening app: ", consoleoutput)
+                openapp(commandreference,
+                        voicecommand)
 
-            if "link" in config[config.index(l)-3]:
-                print("Opening Link to ", config[config.index(l)-1])
-                link(config[config.index(l)-2],
-                     config[config.index(l)])
+            if "rungame" in typeofcommand:
+                print("Running cmd command: ", consoleoutput)
+                rungame(commandreference,
+                        voicecommand)
 
-            if "buttoncomb" in config[config.index(l)-3]:
+            if "link" in typeofcommand:
+                print("Opening Link to ", consoleoutput)
+                link(commandreference,
+                     voicecommand)
+
+            if "buttoncomb" in typeofcommand:
                 print("Button press command: ",
-                      config[config.index(l)-1])
+                      consoleoutput)
                 buttoncomb(
-                    config[config.index(l)-2].split("+")[0],
-                    config[config.index(l)-2].split("+")[1],
-                    config[config.index(l)])
+                    commandreference.split("+")[0],
+                    commandreference.split("+")[1],
+                    voicecommand)
 
-            if "button3comb" in config[config.index(l)-3]:
+            if "button3comb" in typeofcommand:
                 print("Button press command: ",
-                      config[config.index(l)-1])
+                      consoleoutput)
                 button3comb(
-                    config[config.index(l)-2].split("+")[0],
-                    config[config.index(l)-2].split("+")[1],
-                    config[config.index(l)-2].split("+")[2],
-                    config[config.index(l)])
+                    commandreference.split("+")[0],
+                    commandreference.split("+")[1],
+                    commandreference.split("+")[2],
+                    voicecommand)
 
-            if "keypress" in config[config.index(l)-3]:
+            if "keypress" in typeofcommand:
                 print("single keypress command: ",
-                      config[config.index(l)-1])
-                keypress(
-                    config[config.index(l)],
-                    config[config.index(l)-2].split("+")[0])
+                      consoleoutput)
+                keypress(commandreference.split("+")[0], voicecommand)
 
-            if "typingshortcut" in config[config.index(l)-3]:
+            if "typingshortcut" in typeofcommand:
                 print("typecommand command: ",
-                      config[config.index(l)-1])
-                typingshortcut(
-                    config[config.index(l)],
-                    config[config.index(l)-2].split("+")[0])
+                      consoleoutput)
+                typingshortcut(commandreference.split("+")[0], voicecommand)
 
-            if "appsuspender" in config[config.index(l)-3]:
-                print("Suspend command: ", config[config.index(l)-1])
-                suspendapplication(config[config.index(l)-2])
+            if "appsuspender" in typeofcommand:
+                print("Suspend command: ", consoleoutput)
+                suspendapplication(commandreference)
 
-            if "resume" in config[config.index(l)-3]:
-                print("resume command: ", config[config.index(l)-1])
-                resume(config[config.index(l)-2])
+            if "resume" in typeofcommand:
+                print("resume command: ", consoleoutput)
+                resume(commandreference)
 
         # stopping voice commands
         close = ["voice of", "turn of"]
