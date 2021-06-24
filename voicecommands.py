@@ -14,18 +14,15 @@ import win32con
 global suspended, config, input
 suspended = {}
 SetLogLevel(-1)
-f = open('config.txt', 'r')
+f = open('config.csv', 'r')
 config = f.read().split(',')
 f.close()
 # print(config)
 
 
-def getwordlist():
+def getwordlist(config):
     wordlist = []
     i = 4
-    f = open('config.txt', 'r')
-    config = f.read().split(',')
-    f.close()
     lengthofconfig = len(config)
     while i < lengthofconfig:
         towrite = '"' + config[i] + '"'
@@ -41,9 +38,9 @@ def getwordlist():
     return words
 
 
-print(getwordlist())
+print("These are all the recognized voice commands", getwordlist(config))
 MODEL = Model("indian")
-rec = KaldiRecognizer(MODEL, 16000, getwordlist())
+rec = KaldiRecognizer(MODEL, 16000, getwordlist(config))
 
 P = pyaudio.PyAudio()
 stream = P.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True,
