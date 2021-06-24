@@ -8,7 +8,8 @@ from vosk import KaldiRecognizer
 from vosk import Model
 from vosk import SetLogLevel
 import os
-import win32gui, win32con
+import win32gui
+import win32con
 from collections import defaultdict
 import csv
 
@@ -38,9 +39,13 @@ for key in config.keys():
     towrite = '"' + key + '"'
     wordlist.append(towrite)
 
-wordlist.append('"type", "dictate", "transcribe", "dictation", "voice on", "voice song", "start voice", "mike on", "mic on", "turn on",  "voice of", "close", "mike of", "nike of", "micron", "down", "scroll", "gown", "up", "top", "previous", "application", "done", "tab", "switch application", "suspend","resume", "turn of"')
+wordlist.append('"type", "dictate", "transcribe", "dictation", "voice on"')
+wordlist.append('"voice song", "start voice", "mike on", "mic on", "turn on"')
+wordlist.append('"voice of", "close", "mike of", "nike of", "micron", "down"')
+wordlist.append('"scroll", "gown", "up", "top", "previous", "application", "done"')
+wordlist.append('"tab", "switch application", "suspend","resume", "turn of"')
+wordlist.append('"done"')
 words = str(wordlist).replace("'", "")
-
 
 
 MODEL = Model("indian")
@@ -62,12 +67,12 @@ def listen():
                 if string != "":
                     print(string)
                     return string
-        except:
+        except Exception:
             print("No input")
 
 
 def dictation():
-    speak("transcribe mode")
+    # speak("transcribe mode")
     print("dictation mode")
     rec = KaldiRecognizer(MODEL, 16000)
     while True:
@@ -86,8 +91,37 @@ def dictation():
                     print(string)
                     pyautogui.write(string)
                     pyautogui.write(" ")
-        except:
+        except Exception:
             pass
+
+
+def scrollfxn():
+    upscroll = ["up", "top"]
+    if input in upscroll:
+        print("scrolling now")
+        pyautogui.scroll(5000)
+
+    downscroll = ["down", "scroll", "gown"]
+    if input in downscroll:
+        print("scrolling now")
+        pyautogui.scroll(-600)
+
+
+def appswitching():
+    if "previous application" in input:
+        pyautogui.keyDown('alt')
+        time.sleep(.2)
+        pyautogui.press('tab')
+        time.sleep(.2)
+        pyautogui.keyUp('alt')
+
+    if "previous previous application" in input:
+        pyautogui.keyDown('alt')
+        time.sleep(.2)
+        pyautogui.press('tab')
+        time.sleep(.2)
+        pyautogui.press('tab')
+        pyautogui.keyUp('alt')
 
 
 def speak(text):
@@ -148,28 +182,6 @@ def resume(processname):
     win32gui.ShowWindow(wintomaximize, win32con.SW_SHOWNORMAL)
 
 
-def altdoubletab():
-    pyautogui.keyDown('alt')
-    time.sleep(.2)
-    pyautogui.press('tab')
-    time.sleep(.2)
-    pyautogui.press('tab')
-    pyautogui.keyUp('alt')
-
-
-def alttab():
-    pyautogui.keyDown('alt')
-    time.sleep(.2)
-    pyautogui.press('tab')
-    time.sleep(.2)
-    pyautogui.keyUp('alt')
-
-
-def scroll(command, a):
-    print("scrolling now")
-    pyautogui.scroll(a)
-
-
 def main():
     loop = True
     while(loop is True):
@@ -189,21 +201,9 @@ def on(Mic):
             dictation()
             continue
 
-        if "top" in input:
-            upscroll = ["up", "top"]
-            scroll(upscroll, 5000)
-            continue
-        if "scroll" in input:
-            downscroll = ["down", "scroll", "gown"]
-            scroll(downscroll, -600)
-            continue
+        scrollfxn()
 
-        if "previous application" in input:
-            alttab()
-            continue
-        if "previous previous application" in input:
-            altdoubletab()
-            continue
+        appswitching()
 
         cmd_details = config.get(input)
         if cmd_details == "No Command Found":
