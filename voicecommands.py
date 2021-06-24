@@ -211,10 +211,10 @@ def on(Mic):
             continue
         
         cmd_details = config.get(l)
-        print(cmd_details)
+        # print(cmd_details)
 
-        if cmd_details == "No Command Found":
-            print(cmd_details)
+        if cmd_details == "No Command Found" or cmd_details == None:
+            print("No Command Found")
             continue
         
         
