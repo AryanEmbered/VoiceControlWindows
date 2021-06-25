@@ -8,8 +8,7 @@ from vosk import KaldiRecognizer
 from vosk import Model
 from vosk import SetLogLevel
 import os
-import win32gui
-import win32con
+import pygetwindow as gw
 
 global suspended, config, input
 suspended = {}
@@ -17,7 +16,6 @@ SetLogLevel(-1)
 f = open('config.csv', 'r')
 config = f.read().split(',')
 f.close()
-# print(config)
 
 
 def getwordlist(config):
@@ -33,12 +31,13 @@ def getwordlist(config):
     wordlist.append('"voice of", "close", "mike of", "nike of", "micron"')
     wordlist.append('"scroll", "gown", "up", "top", "previous", "application"')
     wordlist.append('"tab", "switch application", "suspend","resume"')
-    wordlist.append('"done", "turn of", "down", "turn on"')
+    wordlist.append('"done", "turn of", "down", "turn on", "what", "restore"')
+    # print("wordlist so far is :", wordlist, "\n")
     words = str(wordlist).replace("'", "")
     return words
 
 
-print("These are all the recognized voice commands", getwordlist(config))
+# print("\nThese are all the recognized voice commands", getwordlist(config))
 MODEL = Model("indian")
 rec = KaldiRecognizer(MODEL, 16000, getwordlist(config))
 
@@ -127,25 +126,52 @@ def keypress(key, command):
     pyautogui.typewrite([key], interval=0)
 
 
+def restorewindow(processname):
+    windowname = processname.split(".")[0]
+    # print("selected handle is =", gw.getWindowsWithTitle(windowname))
+    windowhandle = gw.getWindowsWithTitle(windowname)[0]
+    # print(windowhandle.isMaximized)
+    if windowhandle.isMaximized is True:
+        windowhandle.activate()
+    else:
+        windowhandle.maximize()
+        windowhandle.activate()
+
+
+def minimizewindow(processname):
+    windowname = processname.split(".")[0]
+    # print("selected handle is =", gw.getWindowsWithTitle(windowname))
+    windowhandle = gw.getWindowsWithTitle(windowname)[0]
+    # print(windowhandle.isMaximized)
+    windowhandle.minimize()
+
+
 def suspendapplication(processname):
-    Minimize = win32gui.GetForegroundWindow()
-    win32gui.ShowWindow(Minimize, win32con.SW_MINIMIZE)
+    minimizewindow(processname)
     output = str(subprocess.check_output("tasklist", shell=True))
     if processname in output:
-        print(processname, " is running")
+        # print(processname, " is running")
         cmdstring = 'suspend.exe '+processname
         os.system(cmdstring)
         # speak("process suspended")
-        win_handle_suspended_app = win32gui.GetForegroundWindow()
-        suspended[processname] = win_handle_suspended_app
+        '''win_handle_suspended_app = win32gui.GetForegroundWindow()
+        suspended[processname] = win_handle_suspended_app'''
+
+
+def destroy(applicationtitle):
+    windowname = applicationtitle.split(".")[0]
+    windowhandle = gw.getWindowsWithTitle(windowname)[0]
+    print(windowhandle)
+    windowhandle.close()
 
 
 def resume(processname):
-    cmdstring = cmdstring = 'suspend.exe '+'-r '+processname
+    cmdstring = 'suspend.exe '+'-r '+processname
     os.system(cmdstring)
     # speak("process resume")
-    wintomaximize = suspended.get(processname)
-    win32gui.ShowWindow(wintomaximize, win32con.SW_SHOWNORMAL)
+    restorewindow(processname)
+    '''wintomaximize = suspended.get(processname)
+    win32gui.ShowWindow(wintomaximize, win32con.SW_SHOWNORMAL)'''
 
 
 def altdoubletab():
@@ -213,6 +239,10 @@ def on(Mic):
             consoleoutput = config[config.index(input)-1]
             commandreference = config[config.index(input)-2]
             typeofcommand = config[config.index(input)-3]
+
+            if "destroy" in typeofcommand:
+                print("Closing :", consoleoutput)
+                destroy(commandreference)
 
             if "openapp" in typeofcommand:
                 print("Opening app: ", consoleoutput)
