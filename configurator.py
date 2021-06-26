@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 layout = [
-            [sg.Text("Type of command \n choices: openapp, destory, suspend, resume, typingshortcut, buttoncomb, 3buttoncomb")],
+            [sg.Text("Type of command \n choices: openapp, destory, suspend, resume, typingshortcut, buttoncomb, button3comb")],
             [sg.Input()],
             [sg.Text("Comamnd sensitive information\n This field depends on the type of command\n if you want to open application, enter the location/path to the exe,\n to suspend or resume, enter the process name from task manager(go to details page),\n for  button combinations, enter the combination, typingshortcut, type the string ")],
             [sg.Input()],

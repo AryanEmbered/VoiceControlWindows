@@ -33,10 +33,6 @@
 
 ,buttoncomb,ctrl+backspace,pressing backspace,delete,
 
-,buttoncomb,win+down,Minimizing the window in focus,minimize,
-
-,buttoncomb,win+up,Maximizing the window in focus,maximize,
-
 ,buttoncomb,alt+f4,killing the window in focus,destroy application,
 
 
