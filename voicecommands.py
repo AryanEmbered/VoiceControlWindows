@@ -213,14 +213,20 @@ def minimize(handle=""):
 
 
 def destroy(applicationtitle):
-    windowname = applicationtitle.split(".")[0]
-    windowhandle = gw.getWindowsWithTitle(windowname)[0]
-    windowhandle.close()
+    try:
+        windowname = applicationtitle.split(".")[0]
+        windowhandle = gw.getWindowsWithTitle(windowname)[0]
+        windowhandle.close()
+    except Exception:
+        print("Unable to close application")
 
 
 def suspendapplication(processname):
-    cmdstring = 'suspend.exe '+processname
-    os.system(cmdstring)
+    try:
+        cmdstring = 'suspend.exe '+processname
+        os.system(cmdstring)
+    except Exception:
+        print("process not found")
     '''output = str(subprocess.check_output("tasklist", shell=True))
     if processname in output:
         cmdstring = 'suspend.exe '+processname
@@ -230,8 +236,11 @@ def suspendapplication(processname):
 
 
 def resume(processname):
-    cmdstring = 'suspend.exe '+'-r '+processname
-    os.system(cmdstring)
+    try:
+        cmdstring = 'suspend.exe '+'-r '+processname
+        os.system(cmdstring)
+    except Exception:
+        print("process not found")
     '''output = str(subprocess.check_output("tasklist", shell=True))
     if processname in output:
         cmdstring = 'suspend.exe '+'-r '+processname
@@ -309,44 +318,56 @@ def resumeforeground():
     f.close()
 
     if input == "resume alpha":
-        fprocess_handle = suspended[0]
-        fprocess = fprocess_handle.rsplit("-", 1)[0]
-        handle = int(fprocess_handle.rsplit("-", 1)[1])
-        resume(fprocess)
-        maximize(handle)
-        updatesuspendedlistfile(suspended[0], "alpha")
+        if suspended[0] != "alpha":
+            fprocess_handle = suspended[0]
+            fprocess = fprocess_handle.rsplit("-", 1)[0]
+            handle = int(fprocess_handle.rsplit("-", 1)[1])
+            resume(fprocess)
+            maximize(handle)
+            updatesuspendedlistfile(suspended[0], "alpha")
 
-        showsuspended()
+            showsuspended()
+        else:
+            print("nothing stored in alpha")
 
     if input == "resume beta":
-        fprocess_handle = suspended[1]
-        fprocess = fprocess_handle.rsplit("-")[0]
-        handle = int(fprocess_handle.rsplit("-")[1])
-        resume(fprocess)
-        maximize(handle)
-        updatesuspendedlistfile(suspended[1], "beta")
+        if suspended[1] != "beta":
+            fprocess_handle = suspended[1]
+            fprocess = fprocess_handle.rsplit("-")[0]
+            handle = int(fprocess_handle.rsplit("-")[1])
+            resume(fprocess)
+            maximize(handle)
+            updatesuspendedlistfile(suspended[1], "beta")
 
-        showsuspended()
+            showsuspended()
+        else:
+            print("nothing stored in beta")
 
     if input == "resume gamma":
-        fprocess_handle = suspended[2]
-        fprocess = fprocess_handle.rsplit("-")[0]
-        handle = int(fprocess_handle.rsplit("-")[1])
-        resume(fprocess)
-        maximize(handle)
-        updatesuspendedlistfile(suspended[2], "gamma")
+        if suspended[2] != "gamma":
+            fprocess_handle = suspended[2]
+            fprocess = fprocess_handle.rsplit("-")[0]
+            handle = int(fprocess_handle.rsplit("-")[1])
+            resume(fprocess)
+            maximize(handle)
+            updatesuspendedlistfile(suspended[2], "gamma")
 
-        showsuspended()
+            showsuspended()
+        else:
+            print("nothing stored in delta")
 
     if input == "resume delta":
-        fprocess_handle = suspended[3]
-        fprocess = fprocess_handle.rsplit("-", 1)[0]
-        handle = int(fprocess_handle.rsplit("-", 1)[1])
-        resume(fprocess)
-        maximize(handle)
-        updatesuspendedlistfile(suspended[3], "delta")
+        if suspended[3] != "delta":
+            fprocess_handle = suspended[3]
+            fprocess = fprocess_handle.rsplit("-", 1)[0]
+            handle = int(fprocess_handle.rsplit("-", 1)[1])
+            resume(fprocess)
+            maximize(handle)
+            updatesuspendedlistfile(suspended[3], "delta")
 
-        showsuspended()
+            showsuspended()
+        else:
+            print("nothing stored in gamma")
 
 
 def inbuiltfunctions():
