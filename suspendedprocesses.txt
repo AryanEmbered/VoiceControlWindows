@@ -1,1 +1,1 @@
-witcher3.exe-2691144,Cuphead.exe-1707452,Hades.exe-2821714,delta,
+alpha,beta,gamma,delta,

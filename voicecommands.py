@@ -19,10 +19,12 @@ SetLogLevel(-1)
 global suspended, config, input
 suspended = []
 
+# reading the config file
 f = open('config.csv', 'r')
 config = f.read().split(',')
 f.close()
 
+# get the directory of the script
 owd = os.getcwd()
 
 
@@ -44,8 +46,6 @@ def getwordlist(config):
     wordlist.append('"one", "two", "three", "four", "five", "six"')
     wordlist.append('"alpha","beta","gamma","delta"')
 
-
-    # print("wordlist so far is :", wordlist, "\n")
     words = str(wordlist).replace("'", "")
     return words
 
@@ -163,34 +163,37 @@ def processname_from_pid(pid):
 
 def maximize(handle=""):
     try:
-        win32gui.ShowWindow(handle, win32con.SW_SHOWNORMAL)
+        win32gui.ShowWindow(handle, win32con.SW_MAXIMIZE)
     except Exception:
         try:
+            print("fallback 1")
             processname = handle
             windowname = processname.split(".")[0]
             windowtomaximize = gw.getWindowsWithTitle(windowname)[0]
             windowtomaximize.maximize()
         except Exception:
             try:
+                print("fallback 2")
                 time.sleep(1)
                 hwnd = win32gui.GetForegroundWindow()
-                win32gui.ShowWindow(hwnd, win32con.SW_SHOWNORMAL)
+                win32gui.ShowWindow(hwnd, win32con.SW_MAXIMIZE)
             except Exception:
                 print("this application sucks. doesn't even minimize properly.")
 
 
 def minimize(handle=""):
     try:
-        #time.sleep(2)
         win32gui.ShowWindow(handle, win32con.SW_MINIMIZE)
     except Exception:
         try:
+            print("fallback 1")
             processname = handle
             windowname = processname.split(".")[0]
             windowtominimize = gw.getWindowsWithTitle(windowname)[0]
             windowtominimize.minimize()
         except Exception:
             try:
+                print("fallback 2")
                 time.sleep(1)
                 hwnd = win32gui.GetForegroundWindow()
                 win32gui.ShowWindow(hwnd, win32con.SW_MINIMIZE)
@@ -201,7 +204,6 @@ def minimize(handle=""):
 def destroy(applicationtitle):
     windowname = applicationtitle.split(".")[0]
     windowhandle = gw.getWindowsWithTitle(windowname)[0]
-    print(windowhandle)
     windowhandle.close()
 
 
@@ -267,7 +269,6 @@ def suspendforeground():
         updatesuspendedlistfile("delta", slot4)
 
 
-
 def resumeforeground():
     f = open("suspendedprocesses.txt", "r")
     suspendedstring = f.read()
@@ -330,9 +331,11 @@ def inbuiltfunctions():
         pyautogui.press('tab')
         pyautogui.keyUp('alt')
     if input == "maximize":
-        maximize()
+        handle = win32gui.GetForegroundWindow()
+        maximize(handle)
     if input == "minimize":
-        minimize()
+        handle = win32gui.GetForegroundWindow()
+        minimize(handle)
     suspendforeground()
     resumeforeground()
 
