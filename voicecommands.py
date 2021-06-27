@@ -164,16 +164,13 @@ def processname_from_pid(pid):
 def maximize(handle=""):
     try:
         time.sleep(1)
-        print(handle)
         win32gui.ShowWindow(handle, win32con.SW_MAXIMIZE)
     except Exception:
         try:
             print("fallback 1")
             processname = handle
             windowname = processname.split(".")[0]
-            print(windowname)
             windowtomaximize = gw.getWindowsWithTitle(windowname)[0]
-            print(windowtomaximize)
             windowtomaximize.maximize()
         except Exception:
             try:
@@ -222,21 +219,25 @@ def destroy(applicationtitle):
 
 
 def suspendapplication(processname):
-    output = str(subprocess.check_output("tasklist", shell=True))
+    cmdstring = 'suspend.exe '+processname
+    os.system(cmdstring)
+    '''output = str(subprocess.check_output("tasklist", shell=True))
     if processname in output:
         cmdstring = 'suspend.exe '+processname
         os.system(cmdstring)
     else:
-        print(processname, " is not running")
+        print(processname, " is not running")'''
 
 
 def resume(processname):
-    output = str(subprocess.check_output("tasklist", shell=True))
+    cmdstring = 'suspend.exe '+'-r '+processname
+    os.system(cmdstring)
+    '''output = str(subprocess.check_output("tasklist", shell=True))
     if processname in output:
         cmdstring = 'suspend.exe '+'-r '+processname
         os.system(cmdstring)
     else:
-        print(processname, " is not suspended")
+        print(processname, " is not suspended")'''
 
 
 def updatesuspendedlistfile(string1, string2):
@@ -296,7 +297,6 @@ def suspendforeground():
         minimize(handle)
         suspendapplication(fprocess)
         slot4 = fprocess + "-" + str(handle)
-        print(slot4)
         updatesuspendedlistfile("delta", slot4)
 
         showsuspended()
@@ -310,8 +310,8 @@ def resumeforeground():
 
     if input == "resume alpha":
         fprocess_handle = suspended[0]
-        fprocess = fprocess_handle.split("-")[0]
-        handle = int(fprocess_handle.split("-")[1])
+        fprocess = fprocess_handle.rsplit("-", 1)[0]
+        handle = int(fprocess_handle.rsplit("-", 1)[1])
         resume(fprocess)
         maximize(handle)
         updatesuspendedlistfile(suspended[0], "alpha")
@@ -320,8 +320,8 @@ def resumeforeground():
 
     if input == "resume beta":
         fprocess_handle = suspended[1]
-        fprocess = fprocess_handle.split("-")[0]
-        handle = int(fprocess_handle.split("-")[1])
+        fprocess = fprocess_handle.rsplit("-")[0]
+        handle = int(fprocess_handle.rsplit("-")[1])
         resume(fprocess)
         maximize(handle)
         updatesuspendedlistfile(suspended[1], "beta")
@@ -330,8 +330,8 @@ def resumeforeground():
 
     if input == "resume gamma":
         fprocess_handle = suspended[2]
-        fprocess = fprocess_handle.split("-")[0]
-        handle = int(fprocess_handle.split("-")[1])
+        fprocess = fprocess_handle.rsplit("-")[0]
+        handle = int(fprocess_handle.rsplit("-")[1])
         resume(fprocess)
         maximize(handle)
         updatesuspendedlistfile(suspended[2], "gamma")
@@ -340,8 +340,8 @@ def resumeforeground():
 
     if input == "resume delta":
         fprocess_handle = suspended[3]
-        fprocess = fprocess_handle.split("-")[0]
-        handle = int(fprocess_handle.split("-")[1])
+        fprocess = fprocess_handle.rsplit("-", 1)[0]
+        handle = int(fprocess_handle.rsplit("-", 1)[1])
         resume(fprocess)
         maximize(handle)
         updatesuspendedlistfile(suspended[3], "delta")
