@@ -8,7 +8,7 @@ with open("config.txt",'r') as f:
             config_contents.append(line.split(',')[1:-1])
 
 root = tk.Tk()
-root.geometry("1100x480")
+root.geometry("1200x480")
 root.resizable(0,1)
 class Record:
     def __init__(self,pos,optS = "Command Type"):
@@ -45,8 +45,10 @@ class Record:
 
 appHead = ["Type","Command Reference","Console Message","Voice Command"]
 
-for i in range(4):
-    tk.Label(root,text = appHead[i]).grid(row = 1,column = i)
+tk.Label(root,text = appHead[0],width=14).grid(row = 0,column = 0,padx=10)
+tk.Label(root,text = appHead[1],width=70).grid(row = 0,column = 1,padx=10)
+tk.Label(root,text = appHead[2],width=30).grid(row = 0,column = 2,padx=10)
+tk.Label(root,text = appHead[3],width=40).grid(row = 0,column = 3,padx=10)
 
 cmdType = ["openapp", "link", "buttoncomb", "button3comb","keypress","typingshortcut", "game"]
 selected = tk.StringVar()
@@ -54,12 +56,12 @@ selected.set("opts")
 
 optMenu = tk.OptionMenu(root,selected,*cmdType)
 optMenu.config(width=14)
-optMenu.grid(row=2,column=0,padx=10)
+optMenu.grid(row=2,column=0)
 cmdRef = tk.StringVar()
 e = tk.Entry(root,width=70,bd=3)
-e.grid(row=2,column=1,padx=10)
+e.grid(row=2,column=1)
 e1 = tk.Entry(root,width=30,bd=3)
-e1.grid(row=2,column=2,padx=10)
+e1.grid(row=2,column=2)
 e2 = tk.Entry(root,width=40,bd=3)
-e2.grid(row=2,column=3,padx=10)
+e2.grid(row=2,column=3)
 root.mainloop()
