@@ -33,11 +33,7 @@
 
 ,buttoncomb,ctrl+backspace,pressing backspace,delete,
 
-,buttoncomb,win+down,Minimizing the window in focus,minimize,
-
-,buttoncomb,win+up,Maximizing the window in focus,maximize,
-
-,buttoncomb,alt+f4,killing the window in focus,kill app,
+,buttoncomb,alt+f4,killing the window in focus,destroy application,
 
 
 ,button3comb,win+ctrl+left,move to the virtual desktop on the left,swipe left,
@@ -45,7 +41,6 @@
 ,button3comb,win+ctrl+right,move to the virtual desktop on the right,swipe right,
 
 ,button3comb,shift+ctrl+esc,opening task manager,i want to talk to the manager,
-
 
 
 ,keypress,space+,pressing spacebar,space,
@@ -82,8 +77,17 @@
 
 ,appsuspender,Hades.exe,suspending Hades,suspend hey these,
 
-,resume,Hades.exe,resuming Super Hades,resume hey these,
+,resume,Hades.exe,resuming Hades,resume hey these,
 
 ,appsuspender,MirrorsEdge.exe,suspending Mirror's Edge,suspend mirror edge,
 
 ,resume,MirrorsEdge.exe,resuming Mirror's Edge,resume mirror edge,
+
+,destroy,Cuphead.exe,Cuphead is closing now,destroy cup head,
+
+,destroy,Hades.exe,closing Hades,destroy hey these,
+
+,destroy,witcher,closing The Witcher 3,destroy witch,
+
+
+,openapp,D:\The Pathless\Pathless\Binaries\Win64\Pathless-Win64-Shipping,Launching Pathless,run path less,
