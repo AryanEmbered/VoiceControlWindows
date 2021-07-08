@@ -2,7 +2,7 @@ import tkinter as tk
 
 config_contents = []
 
-with open("config.txt",'r') as f:
+with open("config.csv",'r') as f:
     for line in f.readlines():
         if line != '\n':
             config_contents.append(line.split(',')[1:-1])
