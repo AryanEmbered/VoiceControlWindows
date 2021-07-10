@@ -12,7 +12,7 @@ rootFrame = tk.Frame(root)
 rootFrame.pack(fill=tk.BOTH,expand=1)
 
 canvas = tk.Canvas(rootFrame)
-canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
+canvas.pack(side = tk.LEFT,fill=tk.BOTH, expand=1)
 
 my_scrollbar = ttk.Scrollbar(rootFrame, orient="vertical", command=canvas.yview)
 my_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
