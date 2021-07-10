@@ -1,93 +1,93 @@
-cmdType,path,feedback,voice-command
+,openapp,C:\Windows\system32\notepad.exe,notepad,note pad,
 
-openapp,C:\Windows\system32\notepad.exe,notepad,note pad
+,openapp,C:\Users\aryan\3D Objects\Movavi Video Editor Plus\VideoEditorPlus.exe,movavi,video editing,
 
-openapp,C:\Users\aryan\3D Objects\Movavi Video Editor Plus\VideoEditorPlus.exe,movavi,video editing
+,openapp,C:\Users\aryan\Desktop\System utilities\scrcpy-win64-v1.14\scrcpy-noconsole.exe,scrcpy,phone,
 
-openapp,C:\Users\aryan\Desktop\System utilities\scrcpy-win64-v1.14\scrcpy-noconsole.exe,scrcpy,phone
+,openapp,D:\Cuphead\Cuphead.exe,Launching Cuphead,run cup head,
 
-openapp,D:\Cuphead\Cuphead.exe,Launching Cuphead,run cup head
+,openapp,C:\Users\aryan\3D Objects\The Witcher 3 - Wild Hunt\bin\x64\witcher3.exe, Launching Witcher3 ,run witch,
 
-openapp,C:\Users\aryan\3D Objects\The Witcher 3 - Wild Hunt\bin\x64\witcher3.exe, Launching Witcher3 ,run witch
+,openapp,C:\Users\aryan\3D Objects\Sekiro - Shadows Die Twice\sekiro.exe,launching Sekiro,run say ki ro,
 
-openapp,C:\Users\aryan\3D Objects\Sekiro - Shadows Die Twice\sekiro.exe,launching Sekiro,run say ki ro
+,openapp,D:\Superhot\SH.exe,launching Superhot,run super hot,
 
-openapp,D:\Superhot\SH.exe,launching Superhot,run super hot
+,openapp,D:\Hades\x64\Hades.exe,launching Hades,run hey these,
 
-openapp,D:\Hades\x64\Hades.exe,launching Hades,run hey these
-
-openapp,D:\Mirror's Edge G\Binaries\MirrorsEdge.exe,launching Mirrors Edge,run mirror edge
+,openapp,D:\Mirror's Edge G\Binaries\MirrorsEdge.exe,launching Mirrors Edge,run mirror edge,
 
 
 
-link,https://www.youtube.com/feed/subscriptions ,website: YouTube,you tube
-link,https://www.youtube.com/watch?v=x7s8968L8QE&t=484s&ab_channel=MusicrundiAntoñoaguirre ,Website: Music on YouTube,music
+,link,https://www.youtube.com/feed/subscriptions ,website: YouTube,you tube,
+,link,https://www.youtube.com/watch?v=x7s8968L8QE&t=484s&ab_channel=MusicrundiAntoñoaguirre ,Website: Music on YouTube,music,
 
 
 
-buttoncomb,alt+d,next browser tab,right
+,buttoncomb,alt+d,next browser tab,right,
 
-buttoncomb,alt+a,previous browser tab,left
+,buttoncomb,alt+a,previous browser tab,left,
 
-buttoncomb,alt+e,open a new browser tab,new tab
+,buttoncomb,alt+e,open a new browser tab,new tab,
 
-buttoncomb,alt+w,closing the current browser tab,terminate
+,buttoncomb,alt+w,closing the current browser tab,terminate,
 
-buttoncomb,ctrl+backspace,pressing backspace,delete
+,buttoncomb,ctrl+backspace,pressing backspace,delete,
 
-buttoncomb,alt+f4,killing the window in focus,destroy application
-
-
-button3comb,win+ctrl+left,move to the virtual desktop on the left,swipe left
-
-button3comb,win+ctrl+right,move to the virtual desktop on the right,swipe right
-button3comb,shift+ctrl+esc,opening task manager,i want to talk to the manager
+,buttoncomb,alt+f4,killing the window in focus,destroy application,
 
 
-keypress,space+,pressing spacebar,space
+,button3comb,win+ctrl+left,move to the virtual desktop on the left,swipe left,
 
-keypress,f5,refresh the current webpage,refresh
+,button3comb,win+ctrl+right,move to the virtual desktop on the right,swipe right,
+
+,button3comb,shift+ctrl+esc,opening task manager,i want to talk to the manager,
 
 
+,keypress,space+,pressing spacebar,space,
 
-typingshortcut,this is going to type a lot of shit+,typing shit,shit
-
-typingshortcut,aryantiwari209@gmail.com+,typing out the email address,email
+,keypress,f5,refresh the current webpage,refresh,
 
 
 
-appsuspender,Cuphead.exe,suspending Cuphead,suspend cup head
+,typingshortcut,this is going to type a lot of shit+,typing shit,shit,
 
-resume,Cuphead.exe,resuming Cuphead,resume cup head
+,typingshortcut,aryantiwari209@gmail.com+,typing out the email address,email,
 
-appsuspender,FEAR.exe,suspending F.E.A.R,suspend fear
 
-resume,FEAR.exe,resuming F.E.A.R,resume fear
 
-appsuspender,sekiro.exe,suspending Sekiro,suspend say ki ro
+,appsuspender,Cuphead.exe,suspending Cuphead,suspend cup head,
 
-resume,sekiro.exe,resuming Sekiro,resume say ki ro
+,resume,Cuphead.exe,resuming Cuphead,resume cup head,
 
-appsuspender,witcher3.exe,suspending Witcher3,suspend witch
+,appsuspender,FEAR.exe,suspending F.E.A.R,suspend fear,
 
-resume,witcher3.exe,resuming Witcher3,resume witch
+,resume,FEAR.exe,resuming F.E.A.R,resume fear,
 
-appsuspender,SH.exe,suspending Super Hot,suspend super hot
+,appsuspender,sekiro.exe,suspending Sekiro,suspend say ki ro,
 
-resume,SH.exe,resuming Super Hot,resume super hot
+,resume,sekiro.exe,resuming Sekiro,resume say ki ro,
 
-appsuspender,Hades.exe,suspending Hades,suspend hey these
+,appsuspender,witcher3.exe,suspending Witcher3,suspend witch,
 
-resume,Hades.exe,resuming Hades,resume hey these
+,resume,witcher3.exe,resuming Witcher3,resume witch,
 
-appsuspender,MirrorsEdge.exe,suspending Mirror's Edge,suspend mirror edge
+,appsuspender,SH.exe,suspending Super Hot,suspend super hot,
 
-resume,MirrorsEdge.exe,resuming Mirror's Edge,resume mirror edge
+,resume,SH.exe,resuming Super Hot,resume super hot,
 
-destroy,Cuphead.exe,Cuphead is closing now,destroy cup head
+,appsuspender,Hades.exe,suspending Hades,suspend hey these,
 
-destroy,Hades.exe,closing Hades,destroy hey these
+,resume,Hades.exe,resuming Hades,resume hey these,
 
-destroy,witcher,closing The Witcher 3,destroy witch
+,appsuspender,MirrorsEdge.exe,suspending Mirror's Edge,suspend mirror edge,
 
-openapp,D:\The Pathless\Pathless\Binaries\Win64\Pathless-Win64-Shipping,Launching Pathless,run path less
+,resume,MirrorsEdge.exe,resuming Mirror's Edge,resume mirror edge,
+
+,destroy,Cuphead.exe,Cuphead is closing now,destroy cup head,
+
+,destroy,Hades.exe,closing Hades,destroy hey these,
+
+,destroy,witcher,closing The Witcher 3,destroy witch,
+
+
+,openapp,D:\The Pathless\Pathless\Binaries\Win64\Pathless-Win64-Shipping,Launching Pathless,run path less,
