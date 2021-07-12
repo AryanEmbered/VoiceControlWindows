@@ -28,6 +28,7 @@ canvas.bind_all("<MouseWheel>", _on_mouse_wheel)
 mainFrame = tk.Frame(canvas)
 canvas.create_window((0,0), window=mainFrame, anchor="nw")
 # mainFrame.pack()
+# version 1.0
 
 
 
