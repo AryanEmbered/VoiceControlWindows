@@ -13,6 +13,44 @@ import win32api
 import win32process
 import win32con
 import win32gui
+import whisper
+import pyaudio
+import wave
+
+model = whisper.load_model("tiny")
+
+def whisper ():
+    result = model.transcribe("recorded.wav")
+    return result["text"]
+
+def record():
+    CHUNK = 1024
+    FORMAT = pyaudio.paInt16
+    CHANNELS = 2
+    RATE = 44100
+    RECORD_SECONDS = 5
+    WAVE_OUTPUT_FILENAME = "recorded.wav"
+    p = pyaudio.PyAudio()
+    stream = p.open(format=FORMAT,
+                    channels=CHANNELS,
+                    rate=RATE,
+                    input=True,
+                    frames_per_buffer=CHUNK)
+    print("* recording")
+    frames = []
+    for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+        data = stream.read(CHUNK)
+        frames.append(data)
+    print("* done recording")
+    stream.stop_stream()
+    stream.close()
+    p.terminate()
+    wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+    wf.setnchannels(CHANNELS)
+    wf.setsampwidth(p.get_sample_size(FORMAT))
+    wf.setframerate(RATE)
+    wf.writeframes(b''.join(frames))
+    wf.close()
 
 SetLogLevel(-1)
 
@@ -83,25 +121,27 @@ def dictation(input):
         if x in input:
             speak("transcribe mode")
             print("dictation mode")
-            rec = KaldiRecognizer(MODEL, 16000)
-            while True:
-                # audioio.speak("ready")
-                DATA = stream.read(5000, exception_on_overflow=False)
-                if len(DATA) == 0:
-                    pass
-                try:
-                    if rec.AcceptWaveform(DATA):
-                        string = rec.Result().rsplit(":")[-1][2:-3]
-                        if string != "":
-                            if "stop typing" in string:
-                                speak("dictation complete")
-                                print("dictation complete")
-                                break
-                            print(string)
-                            pyautogui.write(string)
-                            pyautogui.write(" ")
-                except Exception:
-                    pass
+            record()
+            pyautogui.write(whisper())
+            # rec = KaldiRecognizer(MODEL, 16000)
+            # while True:
+            #     # audioio.speak("ready")
+            #     DATA = stream.read(5000, exception_on_overflow=False)
+            #     if len(DATA) == 0:
+            #         pass
+            #     try:
+            #         if rec.AcceptWaveform(DATA):
+            #             string = rec.Result().rsplit(":")[-1][2:-3]
+            #             if string != "":
+            #                 if "stop typing" in string:
+            #                     speak("dictation complete")
+            #                     print("dictation complete")
+            #                     break
+            #                 print(string)
+            #                 pyautogui.write(string)
+            #                 pyautogui.write(" ")
+            #     except Exception:
+            #         pass
 
 
 def speak(text):
@@ -496,7 +536,7 @@ f = open("suspendedprocesses.txt", "r")
 suspendedstring = f.read()
 suspended = suspendedstring.split(",")
 f.close()
-print("suspended processes are: ", suspended)
+# print("suspended processes are: ", suspended)
 
 Mic = True
 if __name__ == "__main__":
