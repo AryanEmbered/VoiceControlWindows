@@ -16,41 +16,14 @@ import win32gui
 import whisper
 import pyaudio
 import wave
+import tempfile
+import io
+from pydub import AudioSegment
+import speech_recognition as sr
+import warnings
+warnings.filterwarnings("ignore")
 
-model = whisper.load_model("tiny")
 
-def whisper ():
-    result = model.transcribe("recorded.wav")
-    return result["text"]
-
-def record():
-    CHUNK = 1024
-    FORMAT = pyaudio.paInt16
-    CHANNELS = 2
-    RATE = 44100
-    RECORD_SECONDS = 5
-    WAVE_OUTPUT_FILENAME = "recorded.wav"
-    p = pyaudio.PyAudio()
-    stream = p.open(format=FORMAT,
-                    channels=CHANNELS,
-                    rate=RATE,
-                    input=True,
-                    frames_per_buffer=CHUNK)
-    print("* recording")
-    frames = []
-    for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
-        data = stream.read(CHUNK)
-        frames.append(data)
-    print("* done recording")
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
-    wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
-    wf.setnchannels(CHANNELS)
-    wf.setsampwidth(p.get_sample_size(FORMAT))
-    wf.setframerate(RATE)
-    wf.writeframes(b''.join(frames))
-    wf.close()
 
 SetLogLevel(-1)
 
@@ -90,7 +63,7 @@ def getwordlist(config):
 
 words = getwordlist(config)
 
-# print("\nThese are all the recognized voice commands", getwordlist(config))
+print("\nThese are all the recognized voice commands", getwordlist(config))
 MODEL = Model("indian")
 rec = KaldiRecognizer(MODEL, 16000, words)
 
@@ -99,6 +72,54 @@ stream = P.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True,
                 frames_per_buffer=8000)
 stream.start_stream()
 
+
+temp_dir = tempfile.mkdtemp()
+save_path = os.path.join(temp_dir, "temp.wav")
+
+def HighPoweredASR():
+    model = "tiny"
+    english = True
+    verbose = False
+    energy = 400
+    dynamic_energy = False
+    pause = 0.8
+
+    #there are no english models for large
+    if model != "large" and english:
+        model = model + ".en"
+    audio_model = whisper.load_model(model)    
+    
+    #load the speech recognizer and set the initial energy threshold and pause threshold
+    r = sr.Recognizer()
+    r.energy_threshold = energy
+    r.pause_threshold = pause
+    r.dynamic_energy_threshold = dynamic_energy
+
+    with sr.Microphone(sample_rate=16000) as source:
+        r.adjust_for_ambient_noise(source, duration = 1)
+        print("Say something!")
+        while True:
+            #get and save audio to wav file
+            audio = r.listen(source)
+            data = io.BytesIO(audio.get_wav_data())
+            audio_clip = AudioSegment.from_file(data)
+            audio_clip.export(save_path, format="wav")
+
+
+            if english:
+                result = audio_model.transcribe(save_path,language='english')
+            else:
+                result = audio_model.transcribe(save_path)
+
+            if not verbose:
+                predicted_text = result["text"]
+                if predicted_text != "":
+                    text = predicted_text.strip()
+                    print(text)
+                    return text
+                # print("You said: " + predicted_text)
+            else:
+                print(result)
 
 def listen():
     while True:
@@ -114,35 +135,14 @@ def listen():
         except Exception:
             print("No input")
 
-
 def dictation(input):
     dictation = ["transcribe", "dictate", "dictation"]
     for x in dictation:
         if x in input:
             speak("transcribe mode")
             print("dictation mode")
-            record()
-            pyautogui.write(whisper())
-            # rec = KaldiRecognizer(MODEL, 16000)
-            # while True:
-            #     # audioio.speak("ready")
-            #     DATA = stream.read(5000, exception_on_overflow=False)
-            #     if len(DATA) == 0:
-            #         pass
-            #     try:
-            #         if rec.AcceptWaveform(DATA):
-            #             string = rec.Result().rsplit(":")[-1][2:-3]
-            #             if string != "":
-            #                 if "stop typing" in string:
-            #                     speak("dictation complete")
-            #                     print("dictation complete")
-            #                     break
-            #                 print(string)
-            #                 pyautogui.write(string)
-            #                 pyautogui.write(" ")
-            #     except Exception:
-            #         pass
-
+            
+            pyautogui.write(HighPoweredASR())
 
 def speak(text):
     engine = pyttsx3.init()
@@ -454,7 +454,6 @@ def on(Mic):
         global input
 
         input = listen()
-
         inbuiltfunctions()
 
         if input in config:
