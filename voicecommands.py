@@ -63,7 +63,7 @@ def getwordlist(config):
 
 words = getwordlist(config)
 
-print("\nThese are all the recognized voice commands", getwordlist(config))
+# print("\nThese are all the recognized voice commands", getwordlist(config))
 MODEL = Model("indian")
 rec = KaldiRecognizer(MODEL, 16000, words)
 
@@ -141,8 +141,12 @@ def dictation(input):
         if x in input:
             speak("transcribe mode")
             print("dictation mode")
-            
-            pyautogui.write(HighPoweredASR())
+            while True:
+                transcription = HighPoweredASR()
+                if "stop transcribing." in transcription.lower() or "stop transcribing" in transcription.lower():
+                    break
+                else:
+                    pyautogui.write(transcription)
 
 def speak(text):
     engine = pyttsx3.init()
