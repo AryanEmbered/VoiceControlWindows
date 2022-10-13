@@ -98,6 +98,7 @@ def HighPoweredASR():
     with sr.Microphone(sample_rate=16000) as source:
         r.adjust_for_ambient_noise(source, duration = 1)
         print("Say something!")
+        speak("transcribe mode")
         while True:
             #get and save audio to wav file
             audio = r.listen(source)
@@ -139,11 +140,11 @@ def dictation(input):
     dictation = ["transcribe", "dictate", "dictation"]
     for x in dictation:
         if x in input:
-            speak("transcribe mode")
             print("dictation mode")
             while True:
                 transcription = HighPoweredASR()
-                if "stop transcribing." in transcription.lower() or "stop transcribing" in transcription.lower():
+                if "stop transcribing" in transcription.lower() or "stop dictation" in transcription.lower():
+                    speak("Dictation stopped")
                     break
                 else:
                     pyautogui.write(transcription)
