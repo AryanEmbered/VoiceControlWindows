@@ -1,0 +1,4 @@
+pyautogui
+pyttsx3
+pyaudio
+vosk
